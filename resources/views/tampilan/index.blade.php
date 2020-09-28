@@ -32,10 +32,10 @@
       @include('tampilan/header')
 
       <div class="page-content d-flex align-items-stretch"> 
-        <!-- ini Side Navbar -->
-        @include('tampilan/sidebar')
 
+      @include('tampilan/sidebar')
         <div class="content-inner">
+        <!-- ini Side Navbar -->
           <!-- Page Header-->
           <header class="page-header">
             <div class="container-fluid">
@@ -47,10 +47,10 @@
                 @yield('konten')
             <!-- akhir konten -->
           <!-- ini Footer-->
-          @include('tampilan/footer')
         </div>
       </div>
     </div>
+          @include('tampilan/footer')
     <!-- JavaScript files-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/popper.js/umd/popper.min.js"> </script>
