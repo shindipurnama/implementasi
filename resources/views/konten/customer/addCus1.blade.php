@@ -9,68 +9,74 @@
 	<div class="block margin-bottom-sm">
     <br>
     <center><div class="title"><strong>Please Fill The BOX</strong></div></center>
-	<form class="form-horizontal" action="" method="post">
-		{{ @csrf_field() }}
+	<form class="form-horizontal" action="../customer/store" method="post" enctype="multipart/form-data">
 
 	  <div class="form-group row">
-		<label class="col-sm-3 form-control-label">Nama</label>
-			<div class="col-sm-9">
-		 	 <input type="text" class="form-control" name="nama" id="nama">
-			</div>
-	  </div>
-	  <div class="line"></div>
-
-	  <div class="form-group row">
-	 	<label class="col-sm-3 form-control-label">Alamat</label>
-	  	<div class="col-sm-9">
-			<input type="text" class="form-control" name="Alamat" id="Alamat">
-	 	 </div>
-	  </div>
-	  <div class="line"></div>
-
-	  <div class="form-group row">
-		<label class="col-sm-3 form-control-label">Provinsi</label>
-		<div class="col-sm-9">
-		  <input type="email" class="form-control" name="Provinsi" id="Provinsi">
+		<div class="col col-md-3">
+			<label for="text-input" class=" form-control-label">Nama Customer</label></div>
+			<div class="col-12 col-md-9">
+			<input type="text" id="nama" name="nama" placeholder="Masukkan Nama" class="form-control"></div>
 		</div>
 	  </div>
 	  <div class="line"></div>
 
 	  <div class="form-group row">
-		<label class="col-sm-3 form-control-label">Kota</label>
-		<div class="col-sm-9">
-		  <input type="text" class="form-control" name="Kota" id="Kota">
+	  <div class="col col-md-3">
+	  	<label for="email-input" class=" form-control-label">Alamat</label></div>
+		<div class="col-12 col-md-9">
+		<input type="text" id="alamat" name="alamat" placeholder="Masukkan Alamat" class="form-control">
 		</div>
 	  </div>
 	  <div class="line"></div>
 
 	  <div class="form-group row">
-		<label class="col-sm-3 form-control-label">Kecamatan</label>
-		<div class="col-sm-9">
-		  <input type="text" class="form-control" name="Kecamatan" id="Kecamatan">
+	  <div class="col col-md-3">
+	  <label for="select" class=" form-control-label">Provinsi</label></div>
+		<div class="col-12 col-md-9">
+			<select name="provinsi" class="form-control">
+				<option value="">Please select</option>
+				@foreach ($provinsi as $key => $value)
+					<option value="{{ $key }}">{{ $value }}</option>
+				@endforeach
+			</select>
 		</div>
-	  </div>
-	  <div class="line"></div>
-
-	  <div class="form-group row">
-		<label class="col-sm-3 form-control-label">Kelurahan</label>
-		<div class="col-sm-9">
-		  <input type="text" class="form-control" name="Kelurahan" id="Kelurahan">
-		</div>
-	  </div>
-	  <div class="line"></div>
-
-	  <div class="form-group row">
-		<label class="col-sm-3 form-control-label">Kode Pos</label>
-		<div class="col-sm-9">
-		  <input type="text" class="form-control" name="kdpos" id="kdpos">
-		</div>
-	  </div>
-	  <div class="line"></div>
-
-	  <div>
-		
 	</div>
+	  <div class="line"></div>
+
+	  <div class="form-group row">
+	  <div class="col col-md-3">
+	  <label for="select" class=" form-control-label">Kota</label></div>
+		<div class="col-12 col-md-9">
+			<select name="kota" class="form-control">
+				<option value="0">Please select</option>
+			</select>
+		</div>
+	  </div>
+	  <div class="line"></div>
+
+	  <div class="form-group row">
+	  <div class="col col-md-3">
+	  	<label for="select" class=" form-control-label">Kecamatan</label></div>
+		<div class="col-12 col-md-9">
+			<select name="kecamatan" class="form-control">
+				<option value="0">Please select</option>
+			</select>
+		</div>
+	  </div>
+	  <div class="line"></div>
+
+	  <div class="form-group row">
+	  <div class="col col-md-3">
+	  <label for="select" class=" form-control-label">Kode Pos - Kelurahan</label></div>
+		<div class="col-12 col-md-9">
+			<select name="kelurahan" class="form-control">
+				<option value="0">Please select</option>
+			</select>
+		</div>
+	  </div>
+	  <div class="line"></div>
+
+
 	<div class="form-actions form-group">
 	<div class="row">
 		<div class="col-sm-5">
@@ -86,6 +92,8 @@
 	</form>
 </div>
 </div>
+
+
 <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg" role="document">
 		<div class="modal-content">
@@ -111,6 +119,87 @@
                             <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick="saveSnapshot()">Simpan Foto</button>
                         </div>
 			</div>
+<script type="text/javascript">
+	jQuery(document).ready(function ()
+	{
+			jQuery('select[name="provinsi"]').on('change',function(){
+				var countryID = jQuery(this).val();
+				if(countryID)
+				{
+					jQuery.ajax({
+						url : '../customer/addCus1/getstates/' +countryID,
+						type : "GET",
+						dataType : "json",
+						success:function(data)
+						{
+						console.log(data);
+						jQuery('select[name="kota"]').empty();
+						jQuery.each(data, function(key,value){
+							$('select[name="kota"]').append('<option value="'+ key +'">'+ value +'</option>');
+						});
+						}
+					});
+				}
+				else
+				{
+					$('select[name="kota"]').empty();
+				}
+			});
+	});
+	jQuery(document).ready(function ()
+	{
+			jQuery('select[name="kota"]').on('change',function(){
+				var id_kota = jQuery(this).val();
+				if(id_kota)
+				{
+					jQuery.ajax({
+						url : '../customer/tambah1/kecamatan/' +id_kota,
+						type : "GET",
+						dataType : "json",
+						success:function(data)
+						{
+						console.log(data);
+						jQuery('select[name="kecamatan"]').empty();
+						jQuery.each(data, function(key,value){
+							$('select[name="kecamatan"]').append('<option value="'+ key +'">'+ value +'</option>');
+						});
+						}
+					});
+				}
+				else
+				{
+					$('select[name="kecamatan"]').empty();
+				}
+			});
+	});
+	jQuery(document).ready(function ()
+	{
+			jQuery('select[name="kecamatan"]').on('change',function(){
+				var id_kec = jQuery(this).val();
+				if(id_kec)
+				{
+					jQuery.ajax({
+						url : '../customer/tambah1/kelurahan/' +id_kec,
+						type : "GET",
+						dataType : "json",
+						success:function(data)
+						{
+						console.log(data);
+						jQuery('select[name="kelurahan"]').empty();
+						jQuery.each(data, function(key,value){
+							$('select[name="kelurahan"]').append('<option value="'+ key +'">'+ value +' - ' + key +'</option>');
+						});
+						}
+					});
+				}
+				else
+				{
+					$('select[name="kelurahan"]').empty();
+				}
+			});
+	});
+</script>
+
 
 <script type="text/javascript">
     // seleksi elemen video

@@ -14,20 +14,18 @@
 		  <thead>
 			<tr>
 			  <th>#</th>
-			  <th>Nama</th>
-			  <th>Alamat</th>                                   
-			  <th>Provinsi</th>                        
-			  <th>Kota</th>
-			  <th>Kecamatan</th>
-			  <th>Kelurahan</th>
-			  <th>Kode Pos</th>
+			  <th>ID Customer</th>
+			  <th>ID Kelurahan</th>                                   
+			  <th>Nama</th>                        
+			  <th>Alamat</th>
+			  <th>Foto</th>
+			  <th>File Path</th>
 			</tr>
 		  </thead>
 		  <tbody>
 
 		  <tr>
 			  <td>1</td>
-			  <td>-</td>
 			  <td>-</td>
 			  <td>-</td>
 			  <td>-</td>

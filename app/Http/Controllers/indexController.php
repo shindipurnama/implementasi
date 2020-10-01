@@ -11,7 +11,7 @@ class indexController extends Controller
 {
     //
 	public function index(){
-		return view('tampilan/index');
+		return view('tampilan/index'); 
 	}
 
 }
