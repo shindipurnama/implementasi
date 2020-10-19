@@ -11,5 +11,7 @@
           <ul class="list-unstyled">
             <li class="active"><a href="/"> <i class="icon-home"></i>Home </a></li>
             <li><a href="/customer"> <i class="icon-padnote"></i>Customer </a></li>
+            <li><a href="/barang"> <i class="icon-padnote"></i>Barang </a></li>
+            <li><a href="/scan"> <i class="icon-padnote"></i>Scan Barcode </a></li>
 
         </nav>

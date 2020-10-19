@@ -113,7 +113,7 @@
 						<canvas id="myCanvas" width="320" height="240" style="border:1px solid #000000;"></canvas>
 						<button type="button" class="btn btn-primary" onclick="takeSnapshot()">Ambil Foto</button>
 					</div>
-				</div>
+				</div> 
 				<div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick="saveSnapshot()">Simpan Foto</button>
@@ -127,7 +127,7 @@
 				if(countryID)
 				{
 					jQuery.ajax({
-						url : '../customer/addCus1/getstates/' +countryID,
+						url : 'konten/customer/addCus1/getstates/' +countryID,
 						type : "GET",
 						dataType : "json",
 						success:function(data)
@@ -153,7 +153,7 @@
 				if(id_kota)
 				{
 					jQuery.ajax({
-						url : '../customer/tambah1/kecamatan/' +id_kota,
+						url : 'konten/customer/addCus1/kecamatan/' +id_kota,
 						type : "GET",
 						dataType : "json",
 						success:function(data)
@@ -179,7 +179,7 @@
 				if(id_kec)
 				{
 					jQuery.ajax({
-						url : '../customer/tambah1/kelurahan/' +id_kec,
+						url : 'konten/customer/addCus1/kelurahan/' +id_kec,
 						type : "GET",
 						dataType : "json",
 						success:function(data)

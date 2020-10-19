@@ -26,8 +26,13 @@ Route::get('/dataCus','customerController@dataCus');
 Route::get('/addCus1','customerController@addCus1');
 Route::get('/addCus2','customerController@addCus2');
 
-Route::get('getstates/{id}','customerController@getStates');
+Route::get('konten/customer/addCus1/getstates/{id}','customerController@getStates');
 
-Route::get('customer/tambah1/kecamatan/{id}','customerController@kecamatan');
+Route::get('konten/customer/addCus1/kecamatan/{id}','customerController@kecamatan');
 
-Route::get('customer/tambah1/kelurahan/{id}','customerController@kelurahan');
+Route::get('konten/customer/addCus1/kelurahan/{id}','customerController@kelurahan');
+
+Route::get('/barang','barangController@index');
+Route::get('/barcode', 'barangController@barcode');
+Route::get('/cetakBarcode',  'barangController@printBarcode');
+Route::get('/scan',  'barangController@scan');
