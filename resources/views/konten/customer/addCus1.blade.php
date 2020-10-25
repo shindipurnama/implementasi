@@ -87,7 +87,7 @@
 				<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#largeModal">Ambil Gambar</button>
 		</div>
 	</div>
-</div>
+	</div>
 	<center><input type="submit" value="add" class="btn btn-primary"></center>
 	</form>
 </div>
@@ -117,8 +117,15 @@
 				<div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick="saveSnapshot()">Simpan Foto</button>
-                        </div>
+                </div>
 			</div>
+		</div>
+	</div>
+
+
+
+
+
 <script type="text/javascript">
 	jQuery(document).ready(function ()
 	{

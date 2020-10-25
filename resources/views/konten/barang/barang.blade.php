@@ -17,6 +17,7 @@
                    <th>Barang Id</th>
                    <th>Nama</th>  
                    <th>Barcode</th>
+                   <!--<th>Action</th>-->
                  </tr>
                </thead>
                <tbody>
@@ -25,8 +26,8 @@
                        <td>{{ $br->id_barang }} </td>
                        <td>{{ $br->nama }} </td>
                        <td> <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
-                        $br->id_barang, 'C128')}}" height="60" width="180">
-                        <br>{{$br->id_barang }} </td>
+                        $br->id_barang, 'C128')}}" height="60" width="180"></td>
+                       <!-- <td><a href="/cetakBarcodeId/{id}"><button class="btn btn-success">cetak</button</a></td> -->
                     </tr>
                  @endforeach   
             </tbody>

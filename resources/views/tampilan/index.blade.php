@@ -9,7 +9,6 @@
     <meta name="robots" content="all,follow">
 
     
-<script src="{{ asset('/assets/html/js/scanner-barcode.js') }}"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">
@@ -119,7 +118,6 @@
     <script src="{{ asset('/vendor/chart.js/Chart.min.js') }}"></script>
     <script src="{{ asset('/vendor/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ asset('/js/charts-home.js') }}"></script>
-    <script src=" {{ asset('DataTables/datatables.min.js') }}"></script>
     <!-- Main File-->
     <script src="{{ asset('/js/front.js') }}"></script>
   </body>

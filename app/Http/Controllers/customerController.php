@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use app\user;
 
 class customerController extends Controller
 {
@@ -43,5 +44,9 @@ class customerController extends Controller
     {
         $kelurahan = DB::table('kelurahan')->where("ID_KECAMATAN",$id)->pluck("KODEPOS","NAMA_KELURAHAN","ID_KELURAHAN");
         return json_encode($kelurahan);
+    }
+
+    public function store (Request $request){
+        
     }
 }

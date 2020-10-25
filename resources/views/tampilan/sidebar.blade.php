@@ -13,5 +13,12 @@
             <li><a href="/customer"> <i class="icon-padnote"></i>Customer </a></li>
             <li><a href="/barang"> <i class="icon-padnote"></i>Barang </a></li>
             <li><a href="/scan"> <i class="icon-padnote"></i>Scan Barcode </a></li>
+            <li><a href="#exampledropdownDropdown" aria-expanded="true" data-toggle="collapse" class=""> <i class="icon-padnote"></i>GeoLocation</a>
+              <ul id="exampledropdownDropdown" class="list-unstyled collapse show" style="">
+                <li><a href="/location">Data Toko</a></li>
+                <li><a href="/titikAwal">Input Titik Awal</a></li>
+                <li><a href="/titikKunjungan">Titik Kunjungan</a></li>
+              </ul>
+            </li>
 
         </nav>

@@ -38,13 +38,13 @@ class barangController extends Controller
 	}
 
 	public  function printBarcodeId($id){ 
-		$barang =  barang::where('id_barang',$id)->get(); 
+		$barang = DB::table('barang',$id)->get();
 		$no = 1; 
-		$brid=$id;
+		$brid=$id; 
 		$paper_width = 793.7007874; // 38 mm
         $paper_height = 623.62204724; // 18 mm
         $paper_size = array(0, 0, $paper_width, $paper_height);
-		$pdf =  PDF::loadView  ('konten/barang/barcode',['id'=>$brid],  compact('barang', 'no')); 
+		$pdf =  PDF::loadView  ('konten/barang/barcodeId',['id'=>$brid],  compact('barang', 'no')); 
 		$pdf->setPaper('letter'); 
 		return $pdf->stream(); 
 	}
