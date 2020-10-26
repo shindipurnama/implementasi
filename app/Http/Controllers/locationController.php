@@ -48,4 +48,9 @@ class locationController extends Controller
       return $pdf->stream(); 
     }
 
+    public function getNamaToko($id){
+      $data = DB::table('lokasi_toko')->select("nama_toko", "latitude", "longitude", "accuracy")->where("barcode",$id)->get();
+      return response()->json(['data'=>$data]);
+  }
+
 }

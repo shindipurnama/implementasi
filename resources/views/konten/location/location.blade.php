@@ -11,8 +11,8 @@
 
 <table class="table table-striped">
 		  <thead>
-            @foreach ($lokasi_toko as $lok)
-			<tr>
+            
+			<tr align="center">
 			  <th>Barcode</th>
 			  <th>Nama toko</th>                                   
 			  <th>Latitude</th>                        
@@ -20,7 +20,7 @@
 			  <th>Accuracy</th>
 			</tr>
 		  </thead>
-		  <tbody>
+		  <tbody>@foreach ($lokasi_toko as $lok)
 		  <tr align="center">
 			  <td> <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
                     $lok->barcode, 'C128')}}" height="60" width="180">
@@ -29,10 +29,10 @@
 			  <td>{{$lok->latitude }}</td>
 			  <td>{{$lok->longitude }}</td>
 			  <td>{{$lok->accuracy }}</td>
-		  </tr>
+		  </tr> @endforeach
 	</tbody>
 	</table>
-     @endforeach
+    
      <center>
          <a href="CetakBarcodeLokasi"><button type="button" class="btn btn-primary">Cetak Barcode</button></a> 
          </center>
