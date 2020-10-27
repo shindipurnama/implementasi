@@ -90,33 +90,6 @@
 </div>
 	</div>
 
-  <!--titik kunjangan
-  <div class="col-lg-6">
-      <div class="card">
-          <div class="card-header">
-              <strong>Titik Kunjungan</strong>
-          </div>
-          <div class="card-body card-block">
-            <label>Latitude:</label><br>
-                <div class="alert alert-secondary" role="alert" id="lat2" name="lat2"></div>
-            <label>Longitude:</label><br>
-                <div class="alert alert-secondary" role="alert" id="lon2" name="lon2"></div>
-            <label>Accuracy:</label><br>
-                <div class="alert alert-secondary" role="alert" id="acc2" name="acc2"></div>
-          </div>
-          
-          <div class="form-actions form-group">
-              <div class="row">
-                <div class="col col-md-12" align="center">
-                  <button type="button" class="btn btn-primary btn-sm" onclick="getLocation()">Ambil Lokasi</button>
-                  <button type="button" class="btn btn-success btn-sm" onclick="konfirmasi()">Konfirmasi</button>
-                </div>
-              </div>
-          </div>
-
-      </div>
-    -->
-
 <script type="text/javascript" src="https://unpkg.com/@zxing/library@latest"></script>
   <script type="text/javascript">
     window.addEventListener('load', function () {

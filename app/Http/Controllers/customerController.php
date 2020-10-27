@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use app\user;
+use app\customer;
 
 class customerController extends Controller
 {
@@ -16,7 +16,9 @@ class customerController extends Controller
 	}
 
 	public function dataCus(){
-		return view('konten/customer/dataCus');
+        $customer = DB::table('customer')->orderby('ID_CUSTOMER', 'asc')->get();
+        $kelurahan = DB::table('kelurahan')->get();
+		return view('konten/customer/dataCus', ['customer' => $customer, 'kelurahan' => $kelurahan]);
 	}
 
 	public function addCus1(){
@@ -42,11 +44,52 @@ class customerController extends Controller
     }
     public function kelurahan($id) 
     {
-        $kelurahan = DB::table('kelurahan')->where("ID_KECAMATAN",$id)->pluck("KODEPOS","NAMA_KELURAHAN","ID_KELURAHAN");
+        $kelurahan = DB::table('kelurahan')->where('ID_KECAMATAN', $id)->get();
         return json_encode($kelurahan);
     }
 
-    public function store (Request $request){
+    public function store1(Request $request){
+        $id=(DB::table('customer')->count('ID_CUSTOMER'))+1;
+	    $customer_id = "C".str_pad($id,3,"0",STR_PAD_LEFT);
+        DB::table('customer')->insert([
+            'ID_CUSTOMER' => $customer_id,
+            'ID_KELURAHAN' => $request->kelurahan,
+            'NAMA' => $request->nama,
+            'ALAMAT' => $request->alamat,
+            'FOTO' => base64_encode($request->foto)
+        ]);
+        return redirect('/dataCus');
+    }
+
+    public function store2(Request $request)
+    {
+        //dd($request);
+        //decode base64 ke png
+        $foto1 = $request->foto;
+        $foto2 = str_replace('data:image/png;base64,','',$foto1);
+        $foto3 = str_replace(' ', '+', $foto2);
+        $foto_png = base64_decode($foto3);
+
+        //nama foto
+        $nama_foto1 = time(). $request->nama . '.png';
+        $nama_foto2 = str_replace(' ', '_', $nama_foto1);
+
+        //path foto 
+        $path = '/foto/'.$nama_foto2;
+
+        //simpan foto ke path
+        \File::put(base_path().'/public/foto/'.$nama_foto2, $foto_png);
+
+        $id=(DB::table('customer')->count('ID_CUSTOMER'))+1;
+	    $customer_id = "C".str_pad($id,3,"0",STR_PAD_LEFT);
+        DB::table('customer')->insert([
+            'ID_CUSTOMER' => $customer_id,
+            'ID_KELURAHAN' => $request->kelurahan,
+            'NAMA' => $request->nama,
+            'ALAMAT' => $request->alamat,
+            'FILE_PATH' => $path
+        ]);
+        return redirect('/dataCus');
         
     }
-}
+} 

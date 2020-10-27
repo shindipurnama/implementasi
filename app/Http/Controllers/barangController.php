@@ -25,6 +25,17 @@ class barangController extends Controller
 	public function scan(){
     	return view('konten/barang/scan');
 	}
+
+	public function store(Request $request){
+		$id=1;
+		$date= date('mdy');
+	    $barang_id = $date.str_pad($id++,2,"0",STR_PAD_LEFT);
+        DB::table('barang')->insert([
+            'id_barang' => $barang_id,
+            'nama' => $request->nama
+        ]);
+        return redirect('/barang');
+    }
 	
 	public  function printBarcode(){ 
 		$barang =  barang::limit(40)->get(); 

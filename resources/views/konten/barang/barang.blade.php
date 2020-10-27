@@ -8,8 +8,25 @@
 <br>
 <div class="col-lg-12" class="form-inline">
 <div class="card" >
-<div class="table-responsive"> 
-		 
+</br>
+<center><h2 class="h5 no-margin-bottom">Tambah Barang</h2></center>
+</br>
+	<form class="form-horizontal" action="tambahBarang" method="post" enctype="multipart/form-data">
+	{{ @csrf_field() }}
+  <div class="form-group row">
+    <div class="col col-md-1"></div>
+    <div class="col col-md-2"><strong><label for="text-input" class=" form-control-label">Nama Barang</label></strong></div>
+    <div class="col col-md-6"><input type="text" id="nama" name="nama" placeholder="Masukkan Nama Barang" class="form-control"></div>
+    <div class="col col-md-2"><input type="submit" value="add" class="btn btn-success"></div>
+  </div>
+	</form>
+</div>
+
+<div class="card" >
+</br>
+<center><h2 class="h5 no-margin-bottom">Data Barang</h2></center>
+</br>
+<div class="table-responsive"> 		 
          <div class="form-group">  
              <table class="table table-striped">
                <thead>

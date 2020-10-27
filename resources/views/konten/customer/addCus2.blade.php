@@ -1,7 +1,7 @@
 @extends('tampilan/index')
 
 @section('judul')
-     <center><h2 class="h5 no-margin-bottom">Add Customer 1</h2></center>
+     <center><h2 class="h5 no-margin-bottom">Add Customer 2</h2></center>
 @endsection
 
 @section('konten')
@@ -9,8 +9,8 @@
 	<div class="block margin-bottom-sm">
     <br>
     <center><div class="title"><strong>Please Fill The BOX</strong></div></center>
-	<form class="form-horizontal" action="../customer/store" method="post" enctype="multipart/form-data">
-
+	<form class="form-horizontal" action="cusStore2" method="post" enctype="multipart/form-data">
+	{{ @csrf_field() }}
 	  <div class="form-group row">
 		<div class="col col-md-3">
 			<label for="text-input" class=" form-control-label">Nama Customer</label></div>
@@ -19,7 +19,7 @@
 		</div>
 	  </div>
 	  <div class="line"></div>
-
+ 
 	  <div class="form-group row">
 	  <div class="col col-md-3">
 	  	<label for="email-input" class=" form-control-label">Alamat</label></div>
@@ -80,11 +80,12 @@
 	<div class="form-actions form-group">
 	<div class="row">
 		<div class="col-sm-5">
-			<canvas id="myCanvas2" width="320" height="240" style="border:1px solid #000000;">
+            <img src="" id="img" name="img" required="required">
+            <input id="foto" name="foto" type="hidden" value="" required="required">
 		</div>
 		<div class="col-sm-7" text-right>
-				<br><br><br><br>
-				<button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#largeModal">Ambil Gambar</button>
+				<br>
+				<button type="button" onclick="btn_ambilFoto()" class="btn btn-success btn-xl" data-toggle="modal" data-target="#modal">Ambil Foto</button>
 		</div>
 	</div>
 	</div>
@@ -93,38 +94,35 @@
 </div>
 </div>
 
-
-<div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title" id="largeModalLabel">Ambil Foto</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<div class="row">
-					<div class="col-sm-6">
-						<video autoplay="" id="video-webcam" class="border w-100">
-						Browsermu tidak mendukung bro, upgrade donk!</video>
-					</div>
-					<div class="col-sm-6" text-right>
-						<canvas id="myCanvas" width="320" height="240" style="border:1px solid #000000;"></canvas>
-						<button type="button" class="btn btn-primary" onclick="takeSnapshot()">Ambil Foto</button>
-					</div>
-				</div> 
-				<div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button type="button" class="btn btn-primary"  data-dismiss="modal" onclick="saveSnapshot()">Simpan Foto</button>
-                </div>
-			</div>
+<div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content" style="width:500px; margin-left:50px;">
+		<div class="modal-header">
+			<h3 class="modal-title" id="exampleModalLongTitle" style="float:left; margin-top:3px; margin-left:10px;">Ambil Foto</h3>
+			<button type="button" style="margin-top:5px;" class="close tutup-modal" data-dismiss="modal" aria-label="Close">
+			<span aria-hidden="true">&times;</span>
+			</button>
 		</div>
-	</div>
+		<div class="modal-body">
+			<div id="kamera"></div>
+			<div id="results" style="float:right; margin-top:-140px; margin-right:5px;"></div>
+		<center>
+				<br>
+			<button id="btn_kamera" type="button" onclick="take_snapshot()" class="btn btn-primary"><i class="fa fa-camera fa-lg"></i></button>
+		</center>
+		</div>
+		<div class="modal-footer">
+			<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			<button type="button" id="save" class="btn btn-primary simpan-foto" data-dismiss="modal">Save changes</button>
+		</div>
+		</div>
+		</div>
 
 
 
-
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/webcamjs/1.0.26/webcam.min.js" integrity="sha512-dQIiHSl2hr3NWKKLycPndtpbh5iaHLo6MwrXm7F0FM5e+kL2U16oE9uIwPHUl6fQBeCthiEuV/rzP3MiAB8Vfw==" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 	jQuery(document).ready(function ()
@@ -182,94 +180,58 @@
 	jQuery(document).ready(function ()
 	{
 			jQuery('select[name="kecamatan"]').on('change',function(){
-				var id_kec = jQuery(this).val();
-				if(id_kec)
-				{
-					jQuery.ajax({
-						url : 'konten/customer/addCus1/kelurahan/' +id_kec,
-						type : "GET",
-						dataType : "json",
-						success:function(data)
-						{
-						console.log(data);
-						jQuery('select[name="kelurahan"]').empty();
-						jQuery.each(data, function(key,value){
-							$('select[name="kelurahan"]').append('<option value="'+ key +'">'+ value +' - ' + key +'</option>');
-						});
-						}
-					});
-				}
-				else
-				{
-					$('select[name="kelurahan"]').empty();
-				}
+		var kecamatanID = jQuery(this).val();
+		if(kecamatanID)
+		{
+			jQuery.ajax({
+			url : 'konten/customer/addCus1/kelurahan/' +kecamatanID,
+			type : "GET",
+			dataType : "json",
+			success:function(data)
+			{
+				console.log(data);
+				jQuery('select[name="kelurahan"]').empty();
+				jQuery.each(data, function(key, value){
+				$('select[name="kelurahan"]').append('<option value="'+ value.ID_KELURAHAN +'">'+ value.KODEPOS + ' - ' + value.NAMA_KELURAHAN +'</option>');
+				});
+			}
 			});
+		}
+		else
+		{
+			$('select[name="kelurahan"]').empty();
+		}
+		});
 	});
 </script>
 
+<script>
+  Webcam.set({
+    width: 200,
+    height: 140,
+    image_format: 'png',
+    jpeg_quality: 90
+  })
 
-<script type="text/javascript">
-    // seleksi elemen video
-	var video = document.querySelector("#video-webcam");
+  function btn_ambilFoto(){
+    Webcam.attach("#kamera")
+  }
 
-// minta izin user
-navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+  function take_snapshot(){
+    Webcam.snap(function (data_uri){
+      document.getElementById('results').innerHTML =
+      '<img id="hasil" src="'+data_uri+'"/>';
+    });
 
-// jika user memberikan izin
-if (navigator.getUserMedia) {
-	// jalankan fungsi handleVideo, dan videoError jika izin ditolak
-	navigator.getUserMedia({ video: true }, handleVideo, videoError);
-}
-
-// fungsi ini akan dieksekusi jika  izin telah diberikan
-function handleVideo(stream) {
-	video.srcObject = stream;
-}
-
-// fungsi ini akan dieksekusi kalau user menolak izin
-function videoError(e) {
-	// do something
-	alert("Izinkan menggunakan webcam untuk demo!")
-}
-
-function takeSnapshot() {
-	
-
-	// ambil ukuran video
-	var width = video.offsetWidth
-			, height = video.offsetHeight;
-
-	// buat elemen canvas
-	canvas = document.getElementById("myCanvas");
-	canvas.width = width;
-	canvas.height = height;
-
-	// ambil gambar dari video dan masukan 
-	// ke dalam canvas
-	context = canvas.getContext('2d');
-	context.drawImage(video, 0, 0, width, height);
-}
-
-function saveSnapshot() {
-	var img = document.createElement('img');
-
-	// ambil ukuran video
-	var width = video.offsetWidth
-			, height = video.offsetHeight;
-
-	// buat elemen canvas
-	canvas1 = document.getElementById("myCanvas2");
-	canvas1.width = width;
-	canvas1.height = height;
-	foto = document.getElementById("myCanvas");
-
-	context = canvas1.getContext('2d');
-	context.drawImage(foto, 0, 0, width, height);
-
-	img.src = canvas1.toDataURL('image/png');
-	document.getElementById("foto").value=img;
-}
+    var hasil = $('#hasil').attr('src');
+    $('#save').click(function(){
+      $('#img').attr('src', hasil);
+      $('#foto').val(hasil);
+    });
+  }
 </script>
+
+
 
 @endsection
 
