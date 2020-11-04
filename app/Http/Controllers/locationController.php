@@ -53,4 +53,16 @@ class locationController extends Controller
       return response()->json(['data'=>$data]);
   }
 
+    public  function cetakBarcodeId($id){ 
+      $lokasi = DB::table('lokasi_toko')->where('barcode',$id)->get();
+      $no = 1; 
+      $brid=$id; 
+      $paper_width = 793.7007874; // 38 mm
+          $paper_height = 623.62204724; // 18 mm
+          $paper_size = array(0, 0, $paper_width, $paper_height);
+      $pdf =  PDF::loadView  ('konten/location/cetakBarcodeId',  compact('lokasi', 'no')); 
+      $pdf->setPaper('letter'); 
+      return $pdf->stream(); 
+    }
+
 }

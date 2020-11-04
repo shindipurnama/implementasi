@@ -25,10 +25,12 @@
         <select id="sourceSelect" style="max-width:400px">
         </select>
     </div>
-
+    <div class="col-lg-4">
     <label>Result:</label><br>
-    <pre><code id="result"></code></pre>
-    
+    <div class="alert alert-secondary" role="alert" id="result" name="result"></div>
+    <label>Nama Barang:</label><br>
+    <div class="alert alert-secondary" role="alert" id="nama" name="nama"></div>
+    </div>
     </center>
 </div>
 </div>
@@ -64,6 +66,23 @@
               if (result) {
                 console.log(result)
                 document.getElementById('result').textContent = result.text
+              
+                var id = document.getElementById('result').innerHTML;
+                alert("ID barang : "+id);
+                console.log(id);
+                var token = $('meta[name="csrf-token]').attr('content');
+                $.ajax({
+                  type: 'GET',
+                  headers: {
+                      'X-CSRF-TOKEN': token
+                  },
+                  url: '/barang/req-nama-barang/'+id,
+                  dataType: 'json',
+                  success: function(data){
+                    $('#nama').html(data.data[0].nama);
+                  } 
+                });
+
               }
               if (err && !(err instanceof ZXing.NotFoundException)) {
                 console.error(err)

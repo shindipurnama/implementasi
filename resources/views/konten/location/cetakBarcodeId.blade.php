@@ -9,7 +9,8 @@
 </head> 
 <body> 
     <table  width="100%"> 
-    <tr>  
+    <tr> 
+    @for ($i = 0; $i < 40; $i++) 
        @foreach($lokasi  as $lok) 
        <td align="center"  style="border: 1px solid #ccc; width:146.96062992px; height:47.990551181; padding-bottom: 2.1692913386; padding-top: 2.6692913386; padding-left: 3;"> 
        <img src="data:image/png;base64,{{DNS1D::getBarcodePNG(
@@ -20,6 +21,7 @@
            </tr><tr>
       @endif
      @endforeach
+     @endfor
     </tr>
    </tsble>
   </body>

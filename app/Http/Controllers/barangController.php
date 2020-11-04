@@ -27,9 +27,10 @@ class barangController extends Controller
 	}
 
 	public function store(Request $request){
-		$id=1;
 		$date= date('mdy');
-	    $barang_id = $date.str_pad($id++,2,"0",STR_PAD_LEFT);
+    	$d = $date.'%';
+		$id = (DB::table('barang')->where('ID_BARANG','like', $d)->count('ID_BARANG'))+1;
+	    $barang_id = $date.str_pad($id,2,"0",STR_PAD_LEFT);
         DB::table('barang')->insert([
             'id_barang' => $barang_id,
             'nama' => $request->nama
@@ -49,14 +50,19 @@ class barangController extends Controller
 	}
 
 	public  function printBarcodeId($id){ 
-		$barang = DB::table('barang',$id)->get();
+		$barang = DB::table('barang')->where('id_barang',$id)->get();
 		$no = 1; 
 		$brid=$id; 
 		$paper_width = 793.7007874; // 38 mm
         $paper_height = 623.62204724; // 18 mm
         $paper_size = array(0, 0, $paper_width, $paper_height);
-		$pdf =  PDF::loadView  ('konten/barang/barcodeId',['id'=>$brid],  compact('barang', 'no')); 
+		$pdf =  PDF::loadView  ('konten/barang/barcodeId',  compact('barang', 'no')); 
 		$pdf->setPaper('letter'); 
 		return $pdf->stream(); 
+	}
+
+	public function getNama($id){
+		$data = DB::table('barang')->select("nama")->where("id_barang",$id)->get();
+		return response()->json(['data'=>$data]);
 	}
 }

@@ -47,7 +47,7 @@
         <tr align="center">
           <td><label for="inlineFormInput" class="col-sm-form-control-label">Longitude :</label></td>
           <td><label for="inlineFormInput" class="col-sm-form-control-label">Accuracy :</label></td>
-        </tr>
+        </tr> 
         <tr align="center">
           <td><div class="alert alert-secondary" role="alert" id="lon1" name="lon1"></div></td>
           <td><div class="alert alert-secondary" role="alert" id="acc1" name="acc1"></div> </td>

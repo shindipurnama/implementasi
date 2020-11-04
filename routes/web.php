@@ -40,10 +40,12 @@ Route::get('/barcode', 'barangController@barcode');
 Route::get('/cetakBarcode',  'barangController@printBarcode');
 Route::get('/cetakBarcodeId/{id}','barangController@printBarcodeId');
 Route::get('/scan',  'barangController@scan');
+Route::get('barang/req-nama-barang/{id}','barangController@getNama');
 
 Route::get('/location',  'locationController@index');
 Route::get('/titikAwal',  'locationController@titikAwal');
 Route::get('/titikKunjungan',  'locationController@titikKunjungan');
 Route::post('/LocationStore', 'locationController@store');
 Route::get('CetakBarcodeLokasi', 'locationController@cetak');
+Route::get('/cetakBarcodeLokasiId/{id}','locationController@cetakBarcodeId');
 Route::get('Toko/req-nama-toko/{id}','locationController@getNamaToko');
