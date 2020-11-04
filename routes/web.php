@@ -19,6 +19,7 @@ Route::get('/', function () {
 */
 
 Route::get('/','indexController@index');
+Route::get('downloadUserManual','indexController@download');
 
 
 Route::get('/customer','customerController@index');
