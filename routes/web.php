@@ -50,3 +50,5 @@ Route::post('/LocationStore', 'locationController@store');
 Route::get('CetakBarcodeLokasi', 'locationController@cetak');
 Route::get('/cetakBarcodeLokasiId/{id}','locationController@cetakBarcodeId');
 Route::get('Toko/req-nama-toko/{id}','locationController@getNamaToko');
+
+

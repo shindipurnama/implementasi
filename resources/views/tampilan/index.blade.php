@@ -93,7 +93,7 @@
 
       function timerIncrement() {
           idleTime = idleTime + 1;
-          if (idleTime > 59) { // 30 minutes
+          if (idleTime > 59) { // 30 minutes // per30 detik
             $('#myModal').modal('show');
             if (idleTime > 60) { // 20 minutes
               $('#myModal').modal('hide');

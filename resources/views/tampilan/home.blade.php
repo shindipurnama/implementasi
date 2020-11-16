@@ -11,7 +11,7 @@
 <br>
 <center>
 <h5>Download User Manual</h5>
-<a href="downloadUserManual"><button type="button" class="btn btn-primary">Cetak Barcode</button></a></center>
+<a href="downloadUserManual"><button type="button" class="btn btn-primary">Download User Manual</button></a></center>
 <br>
 </div>
 </div>

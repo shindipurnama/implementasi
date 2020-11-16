@@ -65,7 +65,7 @@ function getLocation() {
     x.innerHTML = "Geolocation is not supported by this browser.";
     }
 }
-    
+     
 function showPosition(position) {
     lat.value=position.coords.latitude;
     long.value=position.coords.longitude;
