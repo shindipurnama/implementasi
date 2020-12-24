@@ -29,13 +29,9 @@ class BarangController extends Controller
     }
 
     public function updateBarang(Request $request, $id){
-        $id_barang = $request->id_barang;
-        $nama = $request->nama;
-
-        $barang = barang::find($id);
-        $barang->id_barang= $id_barang;
-        $barang->nama = $nama;
-        $barang->save();
+        barang::where('id_barang', $request->id)->update([
+            'nama'=>$request->nama
+        ]);
 
         return response()->json([
             "message" => "barang record updated"

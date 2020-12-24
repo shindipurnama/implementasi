@@ -17,6 +17,53 @@
               <h6 class="m-0 font-weight-bold text-primary">Data Barang</h6>
             </div>
             <div class="card-body">
+
+            @if($message = Session::get('fsuccess'))
+              <div class="sufee-alert alert with-close alert-primary alert-dismissible fade show">
+                  <span class="badge badge-pill badge-primary">Success</span>
+                  {{ $message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              @endif
+              
+              @if(count($errors) > 0)
+              <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                  <span class="badge badge-pill badge-danger">Error</span>
+                  @foreach($errors->all() as $error)
+                      {{ $error }}
+                  @endforeach
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              @endif
+
+              @if($message = Session::get('ferror'))
+              <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                  <span class="badge badge-pill badge-danger">Error</span>
+                  {{ $message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              @endif
+
+              @if($message = Session::get('ferror2'))
+              <div class="sufee-alert alert with-close alert-danger alert-dismissible fade show">
+                  <span class="badge badge-pill badge-danger">Error</span>
+                  {{ $message }}
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              @endif
+
+              <button type="button" class="btn btn-primary mr-5" data-toggle="modal" data-target="#importExcel">
+                  IMPORT EXCEL
+              </button> <br><br>
+
               <div class="table-responsive">
                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div></div></div><div class="row"><div class="col-sm-12"><table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
                   <thead>
@@ -77,5 +124,30 @@
 </div>
 </div></div>
 
+ <!-- Import Excel -->
+ <div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+      <form method="post" action="import_excel" enctype="multipart/form-data">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
+              </div>
+              <div class="modal-body">
 
+                  {{ csrf_field() }}
+
+                  <label>Pilih file excel</label>
+                  <div class="form-group">
+                      <input type="file" name="file_excel" required="required">
+                  </div>
+
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Import</button>
+              </div>
+          </div>
+      </form>
+  </div>
+</div>
 @endsection

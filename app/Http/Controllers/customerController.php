@@ -2,11 +2,17 @@
 
 namespace App\Http\Controllers;
 
+
+use App\customer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
-use app\customer;
+use App\Imports\CustomerImport;
+use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\HeadingRowImport;
+use Redirect;
+use Storage;
 
 class customerController extends Controller
 {
@@ -91,5 +97,72 @@ class customerController extends Controller
         ]);
         return redirect('/dataCus');
         
+    }
+
+    public function storeExcel(Request $request)
+    {
+        $message = [
+            'mimes' => 'Hanya menerima File Excel dengan format .xls/.xlsx/.csv',
+        ];
+
+        $this->validate($request, [
+			'file_excel' => 'required|mimes:csv,xls,xlsx'
+        ],$message);
+        
+        $file_excel = $request->file('file_excel');
+        $nama_file_excel = date('Y_m_d').'_'.$file_excel->getClientOriginalName();
+        $path_file_excel = '/file_cust/'.$nama_file_excel;
+
+        // Simpan file ke public
+        $file_excel->move('file_cust', $nama_file_excel);
+        
+        $headings = (new HeadingRowImport)->toArray(public_path().$path_file_excel);
+
+        $headings = $headings[0][0];
+
+        if($headings[0] == "id_customer" && $headings[1] == "nama" && $headings[2] == "alamat" && $headings[3] == "id_kelurahan"){
+            $customer = Excel::toArray(new CustomerImport, public_path().$path_file_excel);
+            // $data_customer[] = customer::select('*')->get();
+            $data = [];
+            $old = [];
+
+            for($i=0;$i<count($customer[0]);$i++){
+
+                $customer[0][$i]['id_customer'] = trim($customer[0][$i]['id_customer'],"'");
+
+                //mengecek apakah ada id customer di tabel customer. Jika tidak ada, data akan diinputkan.
+                // if($data_customer[0][$i]['ID_CUSTOMER'] != $customer[0][$i]['id_customer']){
+                if(!customer::where('id_customer', $customer[0][$i]['id_customer'])->exists()){
+                    $data[] = [
+                        'ID_CUSTOMER' => $customer[0][$i]['id_customer'],
+                        'NAMA' => $customer[0][$i]['nama'],
+                        'ALAMAT' => $customer[0][$i]['alamat'],
+                        'ID_KELURAHAN' => $customer[0][$i]['id_kelurahan']
+                    ];
+                }
+                elseif(!customer::where('nama', $customer[0][$i]['nama'])->exists()){
+                    $old = $customer[0][$i]['id_customer'];
+                }
+                    
+            }
+
+            if($old == null){
+                customer::insert($data);
+                Session::flash('fsuccess','Data Berhasil Diimport.');
+                return redirect('/dataCus');
+            }else{
+                Session::flash('ferror2','ID Sudah Ada : '.$old);
+                return redirect('/dataCus');
+            }
+
+            //menghapus file excel
+            Storage::disk('public')->delete($path_file_excel);
+        }
+        else{
+            //menghapus file excel
+            Storage::disk('public')->delete($path_file_excel);
+            Session::flash('ferror','Data Excel tidak sesuai format.');
+            return redirect('/dataCus');
+        }
     }
 } 

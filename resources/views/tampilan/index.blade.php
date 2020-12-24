@@ -7,8 +7,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
+    <meta name="google-signin-client_id" content="490293223703-cs5mvvdilfvi5gjlbbmb6qiu406s54vq.apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="profile email">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Bootstrap CSS-->
     <link rel="stylesheet" href="{{ asset('/vendor/bootstrap/css/bootstrap.min.css') }}">

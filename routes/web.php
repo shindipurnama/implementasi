@@ -28,6 +28,7 @@ Route::get('/addCus1','customerController@addCus1');
 Route::post('cusStore1','customerController@store1');
 Route::get('/addCus2','customerController@addCus2');
 Route::post('cusStore2','customerController@store2');
+Route::post('import_excel','customerController@storeExcel');
 
 Route::get('konten/customer/addCus1/getstates/{id}','customerController@getStates');
 
