@@ -20,5 +20,12 @@
                 <li><a href="/titikKunjungan">Titik Kunjungan</a></li>
               </ul>
             </li>
+            <li><a href="#exampledropdownDropdown" aria-expanded="true" data-toggle="collapse" class=""> <i class="icon-padnote"></i>ScoreBoard</a>
+              <ul id="exampledropdownDropdown" class="list-unstyled collapse show" style="">
+                <li><a href="scoreboard">Display</a></li>
+                <li><a href="kontrolscoreboard">Kontrol</a></li>
+              </ul>
+            </li>
+          </ul>
 
         </nav>

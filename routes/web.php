@@ -52,4 +52,25 @@ Route::get('CetakBarcodeLokasi', 'locationController@cetak');
 Route::get('/cetakBarcodeLokasiId/{id}','locationController@cetakBarcodeId');
 Route::get('Toko/req-nama-toko/{id}','locationController@getNamaToko');
 
-
+//scoreboard
+Route::get('sse','ScoreboardController@update_sse');
+Route::get('scoreboard','ScoreboardController@index');
+Route::get('kontrolscoreboard','ScoreboardController@kontrol');
+Route::post('store-home','ScoreboardController@store_home');
+Route::post('store-away','ScoreboardController@store_away');
+Route::post('store-homeplus2','ScoreboardController@scorehomeplus2');
+Route::post('store-homeminus2','ScoreboardController@scorehomeminus2');
+Route::post('store-homeplus3','ScoreboardController@scorehomeplus3');
+Route::post('store-homeminus3','ScoreboardController@scorehomeminus3');
+Route::post('store-awayplus2','ScoreboardController@scoreawayplus2');
+Route::post('store-awayminus2','ScoreboardController@scoreawayminus2');
+Route::post('store-awayplus3','ScoreboardController@scoreawayplus3');
+Route::post('store-awayminus3','ScoreboardController@scoreawayminus3');
+Route::post('store-sound1','ScoreboardController@store_sound1');
+Route::post('store-sound2','ScoreboardController@store_sound2');
+Route::post('store-sound3','ScoreboardController@store_sound3');
+Route::post('update-sound','ScoreboardController@update_sound');
+Route::post('update-menit-detik','ScoreboardController@update_menit_detik');
+Route::post('reset-menit-detik','ScoreboardController@reset_menit_detik');
+Route::post('resume-menit-detik','ScoreboardController@resume_menit_detik');
+Route::post('stop-menit-detik','ScoreboardController@stop_menit_detik');
