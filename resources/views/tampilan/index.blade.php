@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Implementasi dan Deploy Sistem</title>
-    <meta name="description" content="">
+    <meta name="description" content="Implementasi">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="robots" content="all,follow">
     <meta name="google-signin-client_id" content="490293223703-cs5mvvdilfvi5gjlbbmb6qiu406s54vq.apps.googleusercontent.com">

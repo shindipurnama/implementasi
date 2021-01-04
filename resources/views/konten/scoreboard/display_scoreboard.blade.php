@@ -1,50 +1,73 @@
-@extends('tampilan/index')
+<link rel="stylesheet" href="css_scoreboard.css">
 
-@section('judul')
-     <center><h2 class="h5 no-margin-bottom">ScoreBoard</h2></center>
-@endsection
-
-@section('konten')
 <meta name="csrf-token" content="{{ csrf_token() }}"> 
-<audio id="audio1">
- <source src="{{ asset('asset/lagu/sound1.mp3') }}" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+<div class="content">
+    <div class="animated fadeIn">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card bg-dark">
+                    <div class="card-body card-block">
+                      <audio id="audio1">
+                      <source src="{{ asset('sound1.mp3') }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                      </audio>
 
-<audio id="audio2">
- <source src="{{ asset('asset/lagu/sound2.mp3') }}" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+                      <audio id="audio2">
+                      <source src="{{ asset('sound2.mp3') }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                      </audio>
 
-<audio id="audio3">
- <source src="{{ asset('asset/lagu/sound3.mp3') }}" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+                      <audio id="audio3">
+                      <source src="{{ asset('sound3.mp3') }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                      </audio>
 
-<audio id="audio4">
- <source src="{{ asset('asset/lagu/sound4.mp3') }}" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
+                      <audio id="audio4">
+                      <source src="{{ asset('asset/lagu/sound4.mp3') }}" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                      </audio>
 
-
-
-<center>
-<div class="form-row">
-    <div class="col md-4" id="name_home">a</div>
-    <div class="col md-4" id="name_away">b</div>
+                      <centre>
+                      <h1 style="text-align: center;">NBA 2021</h1>
+                        <div class="largebox-div">
+                        </div>
+                        <span></span>
+                        <span></span>
+                        <div class="child-div"></div>
+                        <div class="next-div"></div>
+                        <div class="home-team"><div  id="name_home">a</div></div>
+                        <div class="away-team"><div id="name_away">b</div></div>
+                        <div class="timer" id="timer"></span></div>
+                        <div class="twodigit">00</div>
+                        <div class="nexttwodigit"></div>
+                        <div class="doubledot">:</div>
+                        <div class="home-score" id="score_home"></div>
+                        <div class="away-score" id="score_away"></div>
+                        <div class="period" >PERIOD</div>
+                        <div class="periodscore" id="periode"></div>
+                        <div class="foul-home" >FOUL</div>
+                        <div class="foul-away" >FOUL</div>
+                        <div class="foulhomescore" id="fouls_home"></div>
+                        <div class="foulawayscore" id="fouls_away"></div>
+                      </centre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="form-row mt-4">
-    <div class="col md-4" id="score_home">0</div>
-    <div class="col md-4" id="score_away">0</div>
-</div>
-</center>
+        <!-- /.content -->
+        <!-- Footer -->
+        
+        <!-- /.site-footer -->
+    <
+    <!-- /#right-panel -->
 
-<center class="mt-4">
-<div>Timer = <span id="timer">09 : 00</span></div>
-</center>
+    <!-- Scripts -->
     
-<script>
+<script src="js/scoreboard.js"></script>
+    <script>
 var stop;
 var menit;
 var detik;
@@ -57,6 +80,9 @@ window.onload = function() {
           document.getElementById("name_away").innerHTML=data_json[0].name_away;
           document.getElementById("score_home").innerHTML=data_json[0].score_home;
           document.getElementById("score_away").innerHTML=data_json[0].score_away;
+          document.getElementById("periode").innerHTML=data_json[0].periode;
+          document.getElementById("fouls_home").innerHTML=data_json[0].fouls_home;
+          document.getElementById("fouls_away").innerHTML=data_json[0].fouls_away;
 
       
           
@@ -194,4 +220,70 @@ function update_sound(){
         }
 </script>
 
-@endsection
+    
+    
+    <script type="text/javascript">
+        var idleTime = 0;
+        $(document).ready(function () {
+            //Increment the idle time counter every second.
+            var idleInterval = setInterval(timerIncrement, 1000); // 1 second
+
+            //Zero the idle timer on mouse movement.
+            $(this).mousemove(function (e) {
+                idleTime = 0;
+            });
+            $(this).keypress(function (e) {
+                idleTime = 0;
+            });
+        });
+
+        function timerIncrement() {
+            idleTime = idleTime + 1;
+            if (idleTime > 1799) { // 30 minutes
+                $('#myModal'.modal('show'));
+                if (idleTime > 1809){
+                    $('#myModal').modal('hide');
+                    window.alert("Waktu sesi anda telah habis");
+                }
+            }
+        }
+
+        function reload(){
+            window.location.reload();
+        }
+
+        function stop(){
+            $('#myModal').modal('hide');
+            window.alert("Waktu sesi anda telah habis");
+        }
+
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery@2.2.4/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.4/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.1.3/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery-match-height@0.7.2/dist/jquery.matchHeight.min.js"></script>
+    <script src="{{ asset('asset/lte/assets/js/main.js')}}"></script>
+
+    
+    <!--  Chart js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.7.3/dist/Chart.bundle.min.js"></script>
+
+    <!--Chartist Chart-->
+    <script src="https://cdn.jsdelivr.net/npm/chartist@0.11.0/dist/chartist.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartist-plugin-legend@0.6.2/chartist-plugin-legend.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery.flot@0.8.3/jquery.flot.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-pie@1.0.0/src/jquery.flot.pie.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flot-spline@0.0.1/js/jquery.flot.spline.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/simpleweather@3.1.0/jquery.simpleWeather.min.js"></script>
+    <script src="{{ asset('asset/lte/assets/js/init/weather-init.js')}}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@3.9.0/dist/fullcalendar.min.js"></script>
+    <script src="{{ asset('asset/lte/assets/js/init/fullcalendar-init.js')}}"></script> 
+
+   

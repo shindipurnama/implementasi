@@ -241,7 +241,7 @@ class ScoreboardController extends Controller
             'musik' =>  2
         ]);
     
-       
+    
     }
 
     public function store_sound3(Request $request){
@@ -263,6 +263,56 @@ class ScoreboardController extends Controller
     }
   
 
+    //fouls
+    public function fouls_home(Request $request){
+        $score = DB::table('scoreboard')->where('id', '1')->get();
+        foreach($score as $sc){
+            $result = $sc->fouls_home;
+        }
+            $result_fix = $result+1;
+        DB::table('scoreboard')->where('id','1')->update([
+            'fouls_home' =>  $result_fix
+        ]);
+
+       
+    }
+
+    public function fouls_away(Request $request){
+        $score = DB::table('scoreboard')->where('id', '1')->get();
+        foreach($score as $sc){
+            $result = $sc->fouls_away;
+        }
+            $result_fix = $result+1;
+        DB::table('scoreboard')->where('id','1')->update([
+            'fouls_away' =>  $result_fix
+        ]);
+
+    }
+
+    //periode
+    public function store_periode(Request $request){
+        DB::table('scoreboard')->where('id','1')->update([
+            'periode' => $request->input('name_periode') 
+       ]);
+
+       
+    }
+
+    //reset
+    public function reset(){
+        DB::table('scoreboard')->where('id','1')->update([
+            'score_home' => 0,
+            'score_away' => 0,
+            'name_home' => 'HOME',
+            'name_away' => 'AWAY',
+            'status_waktu' => 0,
+            'menit' => 10,
+            'detik' => '00',
+            'periode' => 0,
+            'fouls_home' => 0,
+            'fouls_away' => 0  
+       ]);
+    }
 
 
 }

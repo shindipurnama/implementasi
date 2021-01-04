@@ -74,3 +74,9 @@ Route::post('update-menit-detik','ScoreboardController@update_menit_detik');
 Route::post('reset-menit-detik','ScoreboardController@reset_menit_detik');
 Route::post('resume-menit-detik','ScoreboardController@resume_menit_detik');
 Route::post('stop-menit-detik','ScoreboardController@stop_menit_detik');
+
+Route::post('store-periode','ScoreboardController@store_periode');
+Route::post('store-foulshome','ScoreboardController@fouls_home');
+Route::post('store-foulsaway','ScoreboardController@fouls_away');
+
+Route::post('reset','ScoreboardController@reset');
